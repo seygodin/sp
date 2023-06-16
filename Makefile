@@ -1,6 +1,7 @@
-obj-m += hello.o
-PWD := $(shell pwd) 
-all:
-  make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+obj-m := hello.o
+KDIR := /home/YOUR_ACCOUNT/RPdev/rpi-linux # The custom Rpi kernel source directory in HW1
+PWD := $(shell pwd)
+default:
+  $(MAKE) -C $(KDIR) M=$(PWD) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) modules
 clean:
-  make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+  $(MAKE) -C $(KDIR) M=$(PWD) ARCH=$(ARCH) clean
